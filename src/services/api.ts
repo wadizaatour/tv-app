@@ -1,8 +1,9 @@
 export interface IShow {
   id: number
   name: string
-  genres: string
+  genres: string[]
   rating: { average: number | null }
+  image: { medium: string; original: string } | null
 }
 
 const BASE_API_URL = 'https://api.tvmaze.com'
