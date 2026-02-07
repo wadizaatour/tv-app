@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
 import Details from '@/views/Details.vue'
 import Dashboard from '@/views/Dashboard.vue'
+import GenrePage from '@/views/GenrePage.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -13,6 +14,12 @@ const routes: RouteRecordRaw[] = [
     path: '/details',
     name: 'Details',
     component: Details,
+  },
+  {
+    path: '/genre/:name',
+    name: 'GenrePage',
+    component: GenrePage,
+    props: true, // pass route param as prop
   },
 ]
 
