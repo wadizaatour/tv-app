@@ -2,8 +2,9 @@ export interface IShow {
   id: number
   name: string
   genres: string[]
+  premiered: string | null
   rating: { average: number | null }
-  image: { medium: string; original: string } | null
+  image: { medium: string } | null
 }
 
 const BASE_API_URL = 'https://api.tvmaze.com'
@@ -22,4 +23,9 @@ export const fetchShows = async (): Promise<IShow[]> => {
     console.error('Error fetching shows:', error)
     return []
   }
+}
+
+export const getGenres = (shows: IShow[]): string[] => {
+  const allGenres = shows.flatMap((show) => show.genres)
+  return Array.from(new Set(allGenres)).sort()
 }
