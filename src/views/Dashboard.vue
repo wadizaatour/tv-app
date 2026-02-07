@@ -3,12 +3,10 @@ import ShowCard from '@/components/ShowCard.vue'
 import GenreList from '@/components/GenreList.vue'
 import { useShows } from '@/composables/useShows'
 import { useGenres } from '@/composables/useGenres'
-import { useHorizontalScroll } from '@/composables/useHorizontalScroll'
 import { ref, computed } from 'vue'
 
 const { shows } = useShows()
 const { genres, showsByGenre } = useGenres(() => shows.value)
-const { scrollList } = useHorizontalScroll()
 
 // Track selected genre
 const selectedGenre = ref<string | null>(null)
@@ -58,10 +56,11 @@ function filterByGenre(genre: string) {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 2rem 4rem;
+  padding: 2rem 4rem; /* desktop default */
   color: var(--color-text-primary);
   gap: 2rem;
 }
+
 .header {
   margin-bottom: 2rem;
 }
@@ -79,21 +78,6 @@ function filterByGenre(genre: string) {
   scroll-behavior: smooth;
 }
 
-.scroll-btn {
-  background: var(--color-primary);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 2rem;
-  height: 2rem;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.scroll-btn:hover {
-  background: var(--color-secondary);
-}
-
 .show-all-btn {
   margin-top: 0.5rem;
   display: inline-block;
@@ -106,5 +90,37 @@ function filterByGenre(genre: string) {
 
 .show-all-btn:hover {
   background: var(--color-secondary);
+}
+
+/* ✅ Mobile adjustments */
+@media (max-width: 600px) {
+  .dashboard {
+    padding: 1rem; /* smaller padding */
+    gap: 1.5rem; /* tighter spacing */
+  }
+
+  .header {
+    margin-bottom: 1rem;
+    text-align: center; /* center header text */
+  }
+
+  .header h1 {
+    font-size: 1.5rem; /* smaller title */
+  }
+
+  .header h2 {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+  }
+
+  .shows-list {
+    gap: 0.5rem; /* tighter spacing between cards */
+  }
+
+  .show-all-btn {
+    display: block;
+    text-align: center;
+    margin: 0.75rem auto 0; /* center button */
+  }
 }
 </style>
