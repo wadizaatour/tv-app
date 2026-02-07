@@ -2,6 +2,9 @@
 import { RouterLink } from 'vue-router'
 import ThemeToggle from '@/components/ThemeToggle.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
+import { useDeviceType, DeviceType } from '@/composables/useDeviceType'
+
+const { deviceType } = useDeviceType()
 </script>
 
 <template>
@@ -15,17 +18,18 @@ import Breadcrumb from '@/components/Breadcrumb.vue'
         <div class="search-bar">
           <input type="text" placeholder="Search shows..." />
         </div>
-        <nav>
+        <!-- ✅ Hide nav badges on mobile -->
+        <nav v-if="deviceType !== DeviceType.Mobile">
           <RouterLink to="/details" class="nav-badge">Details</RouterLink>
         </nav>
       </div>
 
-      <!-- Theme toggle on far right -->
+      <!-- Theme toggle -->
       <ThemeToggle />
     </header>
 
-    <!-- Breadcrumb always visible -->
-    <Breadcrumb />
+    <!-- ✅ Hide breadcrumb on mobile -->
+    <Breadcrumb v-if="deviceType !== DeviceType.Mobile" />
 
     <main class="content">
       <slot />
@@ -45,7 +49,7 @@ import Breadcrumb from '@/components/Breadcrumb.vue'
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem; /* consistent horizontal padding */
+  padding: 1rem 2rem;
   gap: 1rem;
 }
 
@@ -69,7 +73,7 @@ import Breadcrumb from '@/components/Breadcrumb.vue'
 /* Search bar */
 .search-bar input {
   width: 100%;
-  max-width: 300px;
+  max-width: 500px;
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-size: 0.9rem;
@@ -102,7 +106,7 @@ nav {
 
 /* Breadcrumb bar */
 .breadcrumb {
-  padding: 0.5rem 2rem; /* same horizontal padding as header */
+  padding: 0.5rem 2rem;
   font-size: 0.9rem;
   color: var(--color-text-secondary, #666);
   display: flex;
@@ -114,5 +118,63 @@ nav {
 .content {
   flex: 1;
   padding: 1rem;
+}
+
+/* ✅ Tablet adjustments */
+@media (max-width: 1024px) {
+  .header {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .middle {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+  .search-bar input {
+    max-width: 350px;
+  }
+}
+
+/* ✅ Mobile adjustments */
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+
+  .logo {
+    text-align: center;
+    font-size: 1.2rem;
+  }
+
+  .middle {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .search-bar input {
+    max-width: 100%;
+  }
+
+  nav {
+    justify-content: center;
+  }
+
+  .nav-badge {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .breadcrumb {
+    padding: 0.5rem 1rem; /* tighter padding on mobile */
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+  }
 }
 </style>
