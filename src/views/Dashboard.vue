@@ -32,31 +32,37 @@ function filterByGenre(genre: string) {
   <div class="dashboard">
     <div class="header">
       <h1>TV Shows</h1>
-      <h2>Browse by Genre</h2>
-      <!-- Pass handler to GenreList -->
+      <h3>Browse by Genre</h3>
       <GenreList :genres="genres" @select-genre="filterByGenre" />
     </div>
-
-    <!-- By Genre -->
     <section v-for="(genreShows, genre) in filteredShowsByGenre" :key="genre">
-      <h2>{{ genre }}</h2>
+      <router-link :to="`/genre/${genre}`" class="genre-link">
+        <h2>{{ genre }}</h2>
+      </router-link>
       <div class="list-container">
         <div class="shows-list" :ref="genre">
           <ShowCard v-for="show in genreShows" :key="show.id" :show="show" />
         </div>
       </div>
-      <router-link :to="`/all/${genre}`" class="show-all-btn">Show All {{ genre }}</router-link>
     </section>
   </div>
 </template>
 
 <style scoped>
+.genre-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.genre-link h2:hover {
+  color: var(--color-primary);
+}
 .dashboard {
   background: var(--color-bg-light);
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 2rem 4rem; /* desktop default */
+  padding: 1rem 1rem; /* desktop default */
   color: var(--color-text-primary);
   gap: 2rem;
 }
