@@ -13,7 +13,9 @@
     "lint": "run-s lint:*",
     "lint:oxlint": "oxlint . --fix",
     "lint:eslint": "eslint . --fix --cache",
-    "format": "prettier --write --experimental-cli src/"
+    "format": "prettier --write --experimental-cli src/",
+    "test": "vitest",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "pinia": "^3.0.4",
