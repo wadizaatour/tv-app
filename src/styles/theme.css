@@ -1,0 +1,48 @@
+:root {
+  /* Dark Mode (Default) */
+  --color-primary: #e50914;
+  --color-secondary: #f5a623;
+  --color-bg-dark: #121212;
+  --color-bg-card: #1e1e1e;
+  --color-text-primary: #fff;
+  --color-text-secondary: #b3b3b3;
+  --color-bg-light: #121212;
+
+  /* Spacing */
+  --space-lg: 2rem;
+  --space-md: 1rem;
+  --space-sm: 0.5rem;
+
+  /* Typography */
+  --font-size-title: 1.25rem;
+  --font-size-text: 0.9rem;
+  --font-weight-bold: 700;
+
+  /* Card */
+  --card-radius: 12px;
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Light Mode */
+[data-theme='light'] {
+  --color-primary: #dc143c;
+  --color-secondary: #ff6b35;
+  --color-bg-dark: #f8f8f8;
+  --color-bg-card: #ffffff;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #666666;
+  --color-bg-light: #f8f8f8;
+}
+
+/* Respect user's system preference */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --color-primary: #dc143c;
+    --color-secondary: #ff6b35;
+    --color-bg-dark: #f8f8f8;
+    --color-bg-card: #ffffff;
+    --color-text-primary: #1a1a1a;
+    --color-text-secondary: #666666;
+    --color-bg-light: #f8f8f8;
+  }
+}
