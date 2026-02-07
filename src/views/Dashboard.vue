@@ -66,18 +66,23 @@ function filterByGenre(genre: string) {
 }
 
 .list-container {
-  position: relative;
-  display: flex;
-  align-items: center;
+  width: 100%;
 }
 
 .shows-list {
   display: flex;
+  flex-direction: row;
   overflow-x: auto;
   gap: 1rem;
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* smooth iOS scroll */
 }
 
+.shows-list::-webkit-scrollbar {
+  display: none; /* hide scrollbar for cleaner look */
+}
+
+/* Show All button */
 .show-all-btn {
   margin-top: 0.5rem;
   display: inline-block;
@@ -92,35 +97,49 @@ function filterByGenre(genre: string) {
   background: var(--color-secondary);
 }
 
+/* ✅ Tablet adjustments */
+@media (max-width: 1024px) {
+  .dashboard {
+    padding: 1.5rem 2rem;
+    gap: 1.5rem;
+  }
+
+  .shows-list {
+    gap: 0.75rem;
+  }
+}
+
 /* ✅ Mobile adjustments */
 @media (max-width: 600px) {
   .dashboard {
-    padding: 1rem; /* smaller padding */
-    gap: 1.5rem; /* tighter spacing */
+    padding: 1rem;
+    gap: 1rem;
   }
 
   .header {
     margin-bottom: 1rem;
-    text-align: center; /* center header text */
+    text-align: center;
   }
 
   .header h1 {
-    font-size: 1.5rem; /* smaller title */
+    font-size: 1.4rem;
+    margin-bottom: 0.25rem;
   }
 
   .header h2 {
-    font-size: 1.1rem;
-    margin-top: 0.5rem;
+    font-size: 1rem;
+    margin: 0.25rem 0 0.5rem;
   }
 
   .shows-list {
-    gap: 0.5rem; /* tighter spacing between cards */
+    gap: 0.5rem;
   }
 
   .show-all-btn {
     display: block;
     text-align: center;
-    margin: 0.75rem auto 0; /* center button */
+    margin: 0.75rem auto 0;
+    font-size: 0.9rem;
   }
 }
 </style>
