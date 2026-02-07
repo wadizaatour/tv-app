@@ -27,7 +27,6 @@ const listRef = ref<HTMLDivElement | null>(null)
   overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
-  padding: 0.5rem;
 }
 
 .genre-badge {
@@ -57,12 +56,15 @@ const listRef = ref<HTMLDivElement | null>(null)
 /* Mobile */
 @media (max-width: 600px) {
   .genre-list {
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap; /* keep badges in one row */
+    justify-content: flex-start; /* align left */
+    overflow-x: auto; /* allow horizontal scroll */
+    -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
   }
   .genre-badge {
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
+    flex-shrink: 0; /* prevent shrinking so they stay side by side */
   }
 }
 </style>
