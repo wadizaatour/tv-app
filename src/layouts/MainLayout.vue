@@ -3,6 +3,7 @@ import { RouterLink } from 'vue-router'
 import ThemeToggle from '@/components/ThemeToggle.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 import LoadingBar from '@/components/LoadingBar.vue'
+import DashboardSkeleton from '@/components/DashboardSkeleton.vue'
 import { useDeviceType, DeviceType } from '@/composables/useDeviceType'
 import { useShowsStore } from '@/stores/shows'
 
@@ -13,6 +14,7 @@ const store = useShowsStore()
 <template>
   <div class="layout">
     <LoadingBar :loading="store.loading" />
+
     <header class="header">
       <RouterLink to="/" class="logo">🎬 MyShows</RouterLink>
       <div class="middle">
@@ -26,7 +28,9 @@ const store = useShowsStore()
     <Breadcrumb v-if="deviceType !== DeviceType.Mobile" />
 
     <main class="content">
-      <slot />
+      <!-- ✅ Show skeleton instead of slot while loading -->
+      <DashboardSkeleton v-if="store.loading" />
+      <slot v-else />
     </main>
   </div>
 </template>

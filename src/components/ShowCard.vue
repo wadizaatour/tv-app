@@ -1,6 +1,13 @@
 <template>
   <RouterLink :to="detailsLink" class="show-card">
-    <img v-if="show.image?.medium" :src="show.image.medium" :alt="show.name" class="show-image" />
+    <img
+      v-if="show.image?.medium"
+      :src="show.image.medium"
+      :alt="show.name"
+      class="show-image"
+      width="160"
+      height="240"
+    />
     <h3 class="show-title">{{ show.name }}</h3>
     <p class="show-year">{{ premiereYear }}</p>
   </RouterLink>

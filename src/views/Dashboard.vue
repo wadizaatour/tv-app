@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ShowCard from '@/components/ShowCard.vue'
+import SkeletonCard from '@/components/SkeletonCard.vue'
 import GenreList from '@/components/GenreList.vue'
 import { useShowsStore } from '@/stores/shows'
 import { useGenres } from '@/composables/useGenres'
@@ -24,19 +25,24 @@ function filterByGenre(genre: string) {
 
 <template>
   <div class="dashboard">
-    <div class="header">
+    <div class="header" v-if="!store.loading">
       <h1>TV Shows</h1>
       <h3>Browse by Genre</h3>
       <GenreList :genres="genres" @select-genre="filterByGenre" />
     </div>
+
     <section v-for="(genreShows, genre) in filteredShowsByGenre" :key="genre">
-      <router-link :to="`/genre/${genre}`" class="genre-link">
+      <router-link :to="`/genre/${genre}`" class="genre-link" v-if="!store.loading">
         <h2>{{ genre }}</h2>
       </router-link>
-      <div class="list-container">
-        <div class="shows-list" :ref="genre">
+
+      <div class="shows-list" :ref="genre">
+        <template v-if="store.loading">
+          <SkeletonCard v-for="n in 6" :key="n" />
+        </template>
+        <template v-else>
           <ShowCard v-for="show in genreShows" :key="show.id" :show="show" />
-        </div>
+        </template>
       </div>
     </section>
   </div>
