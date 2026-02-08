@@ -1,30 +1,24 @@
 <script setup lang="ts">
 import ShowCard from '@/components/ShowCard.vue'
 import GenreList from '@/components/GenreList.vue'
-import { useShows } from '@/composables/useShows'
+import { useShowsStore } from '@/stores/shows'
 import { useGenres } from '@/composables/useGenres'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
-const { shows } = useShows()
-const { genres, showsByGenre } = useGenres(() => shows.value)
+const store = useShowsStore()
+onMounted(() => store.loadShows())
 
-// Track selected genre
+const { genres, showsByGenre } = useGenres(() => store.shows)
+
 const selectedGenre = ref<string | null>(null)
 
-// Filtered genres: either all, or just the selected one
 const filteredShowsByGenre = computed(() => {
   if (!selectedGenre.value) return showsByGenre.value
   return { [selectedGenre.value]: showsByGenre.value[selectedGenre.value] || [] }
 })
 
-// Handle selection
 function filterByGenre(genre: string) {
-  // If the same genre is clicked again, clear the filter
-  if (selectedGenre.value === genre) {
-    selectedGenre.value = null
-  } else {
-    selectedGenre.value = genre
-  }
+  selectedGenre.value = selectedGenre.value === genre ? null : genre
 }
 </script>
 
