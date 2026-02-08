@@ -11,15 +11,16 @@ const routes: RouteRecordRaw[] = [
     component: Dashboard,
   },
   {
-    path: '/details',
+    path: '/details/:id',
     name: 'Details',
     component: Details,
+    props: true,
   },
   {
     path: '/genre/:name',
     name: 'GenrePage',
     component: GenrePage,
-    props: true, // pass route param as prop
+    props: true,
   },
 ]
 
