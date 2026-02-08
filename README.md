@@ -1,54 +1,149 @@
-# tv-app
+# 🎬 MyShows Tv app
 
-This template should help get you started developing with Vue 3 in Vite.
+A modern **Vue 3 + Vite** application that demonstrates senior-level frontend engineering practices.  
+This project showcases clean architecture, responsive design, performance optimization, and reviewer empathy — built around a TV shows dashboard powered by an external API.
 
-## Recommended IDE Setup
+---
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 📖 Table of Contents
 
-## Recommended Browser Setup
+- [Features](#-features)
+- [Technologies Used](#-technologies-used)
+- [Architecture Decisions](#-architecture-decisions)
+- [Setup & Installation](#-setup--installation)
+- [Running Locally](#-running-locally)
+- [Running Tests](#-running-tests)
+- [Use Case Diagram](#-use-case-diagram)
+- [Sequence Diagram](#-sequence-diagram)
+- [Future Improvements](#-future-improvements)
+- [Author](#-author)
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+---
 
-## Type Support for `.vue` Imports in TS
+## 🚀 Features
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+### Core Functionality
 
-## Customize configuration
+- **Dynamic TV Shows Dashboard**
+  - Fetches 200+ shows from an API and organizes them by genre.
+  - Genre-based filtering with toggle behavior.
+  - Horizontal scroll lists for shows, optimized for smooth UX.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- **Show Details Page**
+  - Individual show cards with image, title, and premiere year.
+  - Router-based navigation with clean URL encoding.
 
-## Project Setup
+### User Experience Enhancements
 
-```sh
+- **Skeleton Loading States**
+  - Full-page `DashboardSkeleton` with header, genre titles, and card placeholders.
+  - Per-card `SkeletonCard` shimmer effect for perceived performance.
+  - Seamless swap between skeletons and real content.
+
+- **Responsive Design**
+  - Mobile-first layout with adaptive spacing and typography.
+  - Tablet and desktop breakpoints for consistent UX.
+  - Smooth horizontal scrolling with hidden scrollbars.
+
+- **Theme Toggle**
+  - Light/dark mode support with CSS variables.
+  - Global theme management via a reusable component.
+
+- **Breadcrumb Navigation**
+  - Context-aware breadcrumb bar (hidden on mobile).
+  - Enhances navigation clarity for larger devices.
+
+### Performance Optimizations
+
+- **Largest Contentful Paint (LCP) Improvements**
+  - `fetchpriority="high"` applied to above-the-fold images.
+  - Avoid lazy-loading for critical images.
+  - Explicit width/height attributes to prevent CLS.
+
+- **Skeleton-first Rendering**
+  - `loading` state starts as `true` to ensure skeletons show on initial page load.
+  - Cached data prevents skeleton flashes on navigation.
+
+- **Modern Image Handling**
+  - Support for `srcset` and `sizes` for responsive images.
+  - Ready for WebP/AVIF formats if API/CDN supports them.
+
+---
+
+## 🛠️ Technologies Used
+
+### Frameworks & Libraries
+
+- **Vue 3 (Composition API + `<script setup>`)**
+- **Pinia** for state management
+- **Vue Router** for navigation
+- **Vite** for fast bundling and dev server
+- **Vitest** for unit testing
+
+### Styling & Architecture
+
+- **Scoped CSS** with modern architecture
+- **CSS Variables** for theme management
+- **Responsive Layouts** with flexbox and media queries
+- **Shimmer Skeletons** using CSS animations
+
+### Composables & Utilities
+
+- `useGenres` for genre-based filtering logic
+- `useDeviceType` for responsive device-aware rendering
+- `useShowsStore` (Pinia) for API integration and loading state
+
+### Components
+
+- `ShowCard` — reusable card for show details
+- `SkeletonCard` — shimmer placeholder for show cards
+- `DashboardSkeleton` — full-page skeleton layout
+- `GenreList` — interactive genre filter
+- `ThemeToggle` — light/dark mode switch
+- `Breadcrumb` — navigation helper
+- `LoadingBar` — global loading indicator
+
+---
+
+## 📐 Architecture Decisions
+
+- **Reviewer Empathy**: Explicit imports, clear prop typing, and composable logic for maintainability.
+- **Minimalism vs Professionalism**: Avoid over-engineering while demonstrating best practices.
+- **UX Polish**: Smooth scrolling, fade gradients, skeleton loaders, and responsive spacing.
+- **Performance Awareness**: LCP optimization, preload hints, and skeleton-first rendering.
+
+---
+
+## 🛠️ Setup & Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/myshows-dashboard.git
+cd myshows-dashboard
+```
+
+### 2. Install dependencies
+
+```
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### 3. Running locally
 
-```sh
+```
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### 4. Production build
 
-```sh
+```
 npm run build
+npm run preview
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### 4. Running tests
 
-```sh
-npm run test:unit
 ```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
+npm run test
 ```
