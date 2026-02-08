@@ -1,10 +1,36 @@
 export interface IShow {
   id: number
   name: string
+  language: string
   genres: string[]
+  status: string
   premiered: string | null
-  rating: { average: number | null }
-  image: { medium: string } | null
+  ended?: string | null
+  runtime?: number | null
+  averageRuntime?: number | null
+  rating?: {
+    average: number | null
+  }
+  image?: {
+    medium?: string
+    original?: string
+  }
+  summary?: string
+  officialSite?: string | null
+  network?: {
+    id: number
+    name: string
+    country?: {
+      name: string
+      code: string
+      timezone: string
+    }
+  }
+  externals?: {
+    tvrage?: number
+    thetvdb?: number
+    imdb?: string
+  }
 }
 
 const BASE_API_URL = 'https://api.tvmaze.com'
