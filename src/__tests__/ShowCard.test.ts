@@ -1,26 +1,22 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
-import ShowCard from '@/components/ShowCard.vue'
+import ShowCard, { type IShowCard } from '@/components/ShowCard.vue'
 import type { IShow } from '@/services/api'
 
-const mockShow: IShow = {
+const mockShow: IShowCard = {
   id: 1,
   name: 'Under the Dome',
   premiered: '2013-06-24',
   image: {
     medium: 'https://static.tvmaze.com/uploads/images/medium_portrait/610/1525272.jpg',
   },
-  genres: ['Drama', 'Science-Fiction', 'Thriller'],
-  rating: { average: 6.5 },
 }
 
 const mockShowNoImage = {
   id: 2,
   name: 'Show Without Image',
   premiered: '2015-01-01',
-  image: null,
-  genres: ['Drama', 'Science-Fiction', 'Thriller'],
-  rating: { average: 6.5 },
+  image: undefined,
 }
 
 const mockShowNoDate = {
@@ -30,8 +26,6 @@ const mockShowNoDate = {
   image: {
     medium: 'https://static.tvmaze.com/uploads/images/medium_portrait/610/1525272.jpg',
   },
-  genres: ['Drama', 'Science-Fiction', 'Thriller'],
-  rating: { average: 6.5 },
 }
 
 describe('ShowCard.vue', () => {
