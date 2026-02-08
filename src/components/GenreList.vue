@@ -4,7 +4,8 @@
       v-for="genre in genres"
       :key="genre"
       class="genre-badge"
-      @click="$emit('select-genre', genre)"
+      :class="{ active: genre === selectedGenre }"
+      @click="selectGenre(genre)"
     >
       {{ genre }}
     </span>
@@ -12,12 +13,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref } from 'vue'
 
-defineProps<{ genres: string[] }>()
-defineEmits<{ (e: 'select-genre', genre: string): void }>()
+const props = defineProps<{ genres: string[] }>()
+const emit = defineEmits<{ (e: 'select-genre', genre: string): void }>()
 
-const listRef = ref<HTMLDivElement | null>(null)
+const selectedGenre = ref<string | null>(null)
+
+function selectGenre(genre: string) {
+  if (selectedGenre.value === genre) {
+    // ✅ clicked again → clear selection
+    selectedGenre.value = null
+    emit('select-genre', '')
+  } else {
+    // ✅ new selection
+    selectedGenre.value = genre
+    emit('select-genre', genre)
+  }
+}
 </script>
 
 <style scoped>
@@ -25,7 +38,6 @@ const listRef = ref<HTMLDivElement | null>(null)
   display: flex;
   gap: 0.5rem;
   overflow-x: auto;
-  overflow-y: hidden;
   scroll-behavior: smooth;
 }
 
@@ -45,26 +57,9 @@ const listRef = ref<HTMLDivElement | null>(null)
   transform: scale(1.05);
 }
 
-/* Tablet */
-@media (max-width: 1024px) {
-  .genre-badge {
-    font-size: 0.85rem;
-    padding: 0.4rem 0.9rem;
-  }
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-  .genre-list {
-    flex-wrap: nowrap; /* keep badges in one row */
-    justify-content: flex-start; /* align left */
-    overflow-x: auto; /* allow horizontal scroll */
-    -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
-  }
-  .genre-badge {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.8rem;
-    flex-shrink: 0; /* prevent shrinking so they stay side by side */
-  }
+/* ✅ Active state */
+.genre-badge.active {
+  background: var(--color-primary, #e50914);
+  color: #fff;
 }
 </style>
