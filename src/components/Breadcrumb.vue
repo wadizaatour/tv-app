@@ -8,7 +8,7 @@ const router = useRouter()
 const segments = computed(() => {
   const parts = route.path.split('/').filter(Boolean)
   return parts
-    .filter((part) => part.toLowerCase() !== 'genre')
+    .filter((part) => part.toLowerCase() !== 'genre' && part.toLowerCase() !== 'details')
     .map((part, index, arr) => {
       return {
         name: part.charAt(0).toUpperCase() + part.slice(1),
