@@ -19,9 +19,6 @@ const { deviceType } = useDeviceType()
           <input type="text" placeholder="Search shows..." />
         </div>
         <!-- ✅ Hide nav badges on mobile -->
-        <nav v-if="deviceType !== DeviceType.Mobile">
-          <RouterLink to="/details" class="nav-badge">Details</RouterLink>
-        </nav>
       </div>
 
       <!-- Theme toggle -->
