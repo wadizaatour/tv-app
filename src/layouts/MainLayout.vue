@@ -2,30 +2,27 @@
 import { RouterLink } from 'vue-router'
 import ThemeToggle from '@/components/ThemeToggle.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
+import LoadingBar from '@/components/LoadingBar.vue'
 import { useDeviceType, DeviceType } from '@/composables/useDeviceType'
+import { useShowsStore } from '@/stores/shows'
 
 const { deviceType } = useDeviceType()
+const store = useShowsStore()
 </script>
 
 <template>
   <div class="layout">
+    <LoadingBar :loading="store.loading" />
     <header class="header">
-      <!-- Logo -->
       <RouterLink to="/" class="logo">🎬 MyShows</RouterLink>
-
-      <!-- Middle section: search + nav -->
       <div class="middle">
         <div class="search-bar">
           <input type="text" placeholder="Search shows..." />
         </div>
-        <!-- ✅ Hide nav badges on mobile -->
       </div>
-
-      <!-- Theme toggle -->
       <ThemeToggle />
     </header>
 
-    <!-- ✅ Hide breadcrumb on mobile -->
     <Breadcrumb v-if="deviceType !== DeviceType.Mobile" />
 
     <main class="content">

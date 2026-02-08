@@ -1,0 +1,32 @@
+<template>
+  <div v-if="loading" class="loading-bar"></div>
+</template>
+
+<script setup lang="ts">
+defineProps<{ loading: boolean }>()
+</script>
+
+<style scoped>
+.loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: var(--color-primary, #e50914);
+  animation: loading 1s linear infinite;
+  z-index: 9999;
+}
+
+@keyframes loading {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+</style>

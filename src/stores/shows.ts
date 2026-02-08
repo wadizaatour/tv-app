@@ -1,3 +1,4 @@
+// stores/shows.ts
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { fetchShows, type IShow } from '@/services/api'
