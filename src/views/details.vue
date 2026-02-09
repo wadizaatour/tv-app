@@ -14,7 +14,6 @@ const show = computed(() => store.shows.find((s) => s.id === showId))
 
 <template>
   <div v-if="show" class="details-page">
-    <!-- Hero banner -->
     <div
       class="hero"
       :style="{ backgroundImage: `url(${show.image?.original || show.image?.medium})` }"
@@ -30,7 +29,6 @@ const show = computed(() => store.shows.find((s) => s.id === showId))
       </div>
     </div>
 
-    <!-- Details grid -->
     <div class="info-grid">
       <div>
         <h3>Premiered</h3>
@@ -50,7 +48,6 @@ const show = computed(() => store.shows.find((s) => s.id === showId))
       </div>
     </div>
 
-    <!-- Summary -->
     <div class="summary" v-html="show.summary"></div>
   </div>
 </template>
@@ -62,7 +59,6 @@ const show = computed(() => store.shows.find((s) => s.id === showId))
   flex-direction: column;
 }
 
-/* Hero banner */
 .hero {
   position: relative;
   height: 60vh;
@@ -115,7 +111,6 @@ const show = computed(() => store.shows.find((s) => s.id === showId))
   background: var(--color-secondary, #b20710);
 }
 
-/* Info grid */
 .info-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -135,7 +130,6 @@ const show = computed(() => store.shows.find((s) => s.id === showId))
   margin: 0;
 }
 
-/* Summary */
 .summary {
   padding: 2rem;
   line-height: 1.6;

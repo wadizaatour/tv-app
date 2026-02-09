@@ -26,7 +26,7 @@ function filterByGenre(genre: string) {
   <div class="dashboard">
     <div class="header" v-if="!store.loading">
       <h1>TV Shows</h1>
-      <h3>Browse by Genre</h3>
+      <h2>Browse by Genre</h2>
       <GenreList :genres="genres" @select-genre="filterByGenre" />
     </div>
     <section v-for="(genreShows, genre) in filteredShowsByGenre" :key="genre">
@@ -56,7 +56,7 @@ function filterByGenre(genre: string) {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 1rem 1rem; /* desktop default */
+  padding: 1rem 1rem;
   color: var(--color-text-primary);
   gap: 2rem;
 }

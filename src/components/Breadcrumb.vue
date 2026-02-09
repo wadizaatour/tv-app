@@ -39,12 +39,12 @@ function goTo(path: string) {
   display: flex;
   align-items: center;
   font-size: 0.9rem;
-  padding: 0.5rem 2rem; /* align with header */
+  padding: 0.5rem 2rem;
 }
 
 .crumb {
   cursor: pointer;
-  color: var(--color-primary, #e50914);
+  color: var(--color-primary, white);
 }
 
 .crumb:hover {
