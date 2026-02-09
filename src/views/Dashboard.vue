@@ -25,16 +25,18 @@ function filterByGenre(genre: string) {
 
 <template>
   <div class="dashboard">
-    <div class="header" v-if="!store.loading">
+    <header v-if="!store.loading" class="dashboard-header">
       <h1>TV Shows</h1>
       <h2>Browse by Genre</h2>
       <GenreList :genres="genres" @select-genre="filterByGenre" />
-    </div>
-    <section v-for="(genreShows, genre) in filteredShowsByGenre" :key="genre">
-      <router-link :to="`/genre/${genre}`" class="genre-link" v-if="!store.loading">
+    </header>
+
+    <section v-for="(genreShows, genre) in filteredShowsByGenre" :key="genre" class="genre-section">
+      <router-link v-if="!store.loading" :to="`/genre/${genre}`" class="genre-link">
         <h2>{{ genre }}</h2>
       </router-link>
-      <ul class="shows-list" :ref="genre">
+
+      <ul class="shows-list">
         <li v-for="show in genreShows" :key="show.id">
           <ShowCard :show="show" />
         </li>
@@ -44,38 +46,35 @@ function filterByGenre(genre: string) {
 </template>
 
 <style scoped>
-.genre-link {
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-}
-.genre-link h2:hover {
-  color: var(--color-primary);
-}
 .dashboard {
-  background: var(--color-bg-light);
-  width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 1rem 1rem;
-  color: var(--color-text-primary);
   gap: 2rem;
-}
-
-.header {
-  margin-bottom: 2rem;
-}
-
-.list-container {
+  padding: 1rem;
   width: 100%;
+  background: var(--color-bg-light);
+  color: var(--color-text-primary);
+}
+
+.dashboard-header {
+  margin-bottom: 1rem;
+}
+
+.genre-link {
+  color: inherit;
+  text-decoration: none;
+}
+.genre-link:hover {
+  color: var(--color-primary);
 }
 
 .shows-list {
   display: flex;
-  flex-direction: row;
-  overflow-x: auto;
   gap: 1rem;
+  overflow-x: auto;
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 .shows-list li {
   flex: 0 0 auto;
@@ -89,7 +88,6 @@ function filterByGenre(genre: string) {
     padding: 1.5rem 2rem;
     gap: 1.5rem;
   }
-
   .shows-list {
     gap: 0.75rem;
   }
@@ -100,22 +98,17 @@ function filterByGenre(genre: string) {
     padding: 1rem;
     gap: 1rem;
   }
-
-  .header {
-    margin-bottom: 1rem;
+  .dashboard-header {
     text-align: center;
   }
-
-  .header h1 {
+  .dashboard-header h1 {
     font-size: 1.4rem;
     margin-bottom: 0.25rem;
   }
-
-  .header h2 {
+  .dashboard-header h2 {
     font-size: 1rem;
     margin: 0.25rem 0 0.5rem;
   }
-
   .shows-list {
     gap: 0.5rem;
   }
