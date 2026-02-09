@@ -3,32 +3,34 @@ import { RouterLink } from 'vue-router'
 import ThemeToggle from '@/components/ThemeToggle.vue'
 import LoadingBar from '@/components/LoadingBar.vue'
 import SearchBar from '@/components/SearchBar.vue'
-import { useDeviceType, DeviceType } from '@/composables/useDeviceType'
 import { useShowsStore } from '@/stores/shows'
 import { defineAsyncComponent } from 'vue'
 
 const DashboardSkeleton = defineAsyncComponent(() => import('@/components/DashboardSkeleton.vue'))
-const { deviceType } = useDeviceType()
 const store = useShowsStore()
 </script>
 
 <template>
-  <main class="layout">
+  <div class="layout" role="main">
     <LoadingBar :loading="store.loading" />
+
     <header class="header">
       <h1 class="logo">
-        <RouterLink to="/">🎬 MyShows</RouterLink>
+        <RouterLink to="/" aria-label="Go to dashboard">🎬 MyShows</RouterLink>
       </h1>
-      <div class="middle">
-        <SearchBar />
-      </div>
+      <section class="middle">
+        <form role="search">
+          <SearchBar />
+        </form>
+      </section>
       <ThemeToggle />
     </header>
-    <main class="content">
+
+    <section class="content">
       <DashboardSkeleton v-if="store.loading" />
       <slot v-else />
-    </main>
-  </main>
+    </section>
+  </div>
 </template>
 
 <style scoped>
@@ -49,17 +51,14 @@ const store = useShowsStore()
 .logo {
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--color-primary);
-  text-decoration: none;
 }
 .logo a {
   color: var(--color-primary);
   text-decoration: none;
 }
+
 .middle {
   display: flex;
-  align-items: center;
-  gap: 1rem;
   flex: 1;
   justify-content: center;
 }
@@ -73,12 +72,9 @@ const store = useShowsStore()
   .header {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
   }
-
   .middle {
     flex: 1 1 100%;
-    justify-content: center;
   }
 }
 
@@ -89,12 +85,10 @@ const store = useShowsStore()
     padding: 1rem;
     gap: 0.75rem;
   }
-
   .logo {
     text-align: center;
     font-size: 1.2rem;
   }
-
   .middle {
     flex-direction: column;
     align-items: stretch;
