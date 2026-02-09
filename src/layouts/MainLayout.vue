@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import ThemeToggle from '@/components/ThemeToggle.vue'
 import LoadingBar from '@/components/LoadingBar.vue'
 import SearchBar from '@/components/SearchBar.vue'
+import ThemeToggle from '@/components/ThemeToggle.vue'
 import { useShowsStore } from '@/stores/shows'
 import { defineAsyncComponent } from 'vue'
+import { useDeviceType, DeviceType } from '@/composables/useDeviceType'
+import MenuToggle from '@/components/MenuToggle.vue'
+import { toRefs } from 'vue'
 
 const DashboardSkeleton = defineAsyncComponent(() => import('@/components/DashboardSkeleton.vue'))
 const store = useShowsStore()
+
+const { deviceType } = toRefs(useDeviceType())
 </script>
 
 <template>
@@ -18,12 +23,19 @@ const store = useShowsStore()
       <h1 class="logo">
         <RouterLink to="/" aria-label="Go to dashboard">🎬 MyShows</RouterLink>
       </h1>
-      <section class="middle">
-        <form role="search">
+
+      <div v-if="deviceType !== DeviceType.Mobile" class="desktop-actions">
+        <form role="search" class="search-wrapper">
           <SearchBar />
         </form>
-      </section>
-      <ThemeToggle />
+        <ThemeToggle />
+      </div>
+
+      <MenuToggle v-if="deviceType === DeviceType.Mobile" v-slot="{ closeMenu }">
+        <form role="search" class="mobile-search">
+          <SearchBar :closeMenu="closeMenu" />
+        </form>
+      </MenuToggle>
     </header>
 
     <section class="content">
@@ -34,18 +46,11 @@ const store = useShowsStore()
 </template>
 
 <style scoped>
-.layout {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
-  gap: 1rem;
 }
 
 .logo {
@@ -57,42 +62,20 @@ const store = useShowsStore()
   text-decoration: none;
 }
 
-.middle {
+.desktop-actions {
   display: flex;
+  align-items: center;
+  gap: 1rem;
   flex: 1;
   justify-content: center;
+}
+.search-wrapper {
+  flex: 1;
+  max-width: 400px;
 }
 
 .content {
   flex: 1;
   padding: 1rem;
-}
-
-@media (max-width: 1024px) {
-  .header {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .middle {
-    flex: 1 1 100%;
-  }
-}
-
-@media (max-width: 600px) {
-  .header {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 1rem;
-    gap: 0.75rem;
-  }
-  .logo {
-    text-align: center;
-    font-size: 1.2rem;
-  }
-  .middle {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.75rem;
-  }
 }
 </style>

@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { useShowsStore } from '@/stores/shows'
 import { useRouter } from 'vue-router'
 
+const props = defineProps<{ closeMenu?: () => void }>()
 const MAX_QUERY_LENGTH = 3
 const query = ref('')
 const store = useShowsStore()
@@ -17,6 +18,8 @@ const results = computed(() => {
 function goToShow(showId: number) {
   router.push(`/details/${showId}`)
   query.value = ''
+
+  if (props.closeMenu) props.closeMenu()
 }
 </script>
 
