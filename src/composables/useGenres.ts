@@ -1,4 +1,3 @@
-// src/composables/useGenres.ts
 import { computed } from 'vue'
 import { getGenres, type IShow } from '@/services/api'
 
