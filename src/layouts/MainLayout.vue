@@ -28,10 +28,6 @@ const store = useShowsStore()
       <ThemeToggle />
     </header>
 
-    <nav v-if="deviceType !== DeviceType.Mobile" aria-label="Breadcrumb">
-      <Breadcrumb />
-    </nav>
-
     <main class="content">
       <DashboardSkeleton v-if="store.loading" />
       <slot v-else />
@@ -72,15 +68,6 @@ const store = useShowsStore()
   justify-content: center;
 }
 
-.breadcrumb {
-  padding: 0.5rem 2rem;
-  font-size: 0.9rem;
-  color: var(--color-text-secondary, #666);
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
 .content {
   flex: 1;
   padding: 1rem;
@@ -116,12 +103,6 @@ const store = useShowsStore()
     flex-direction: column;
     align-items: stretch;
     gap: 0.75rem;
-  }
-
-  .breadcrumb {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-    flex-wrap: wrap;
   }
 }
 </style>
