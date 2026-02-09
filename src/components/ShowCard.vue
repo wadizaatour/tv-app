@@ -4,6 +4,7 @@
       v-if="show.image?.medium"
       :src="show.image.medium"
       :alt="show.name"
+      fetchpriority="high"
       class="show-image"
       width="160"
       height="240"
