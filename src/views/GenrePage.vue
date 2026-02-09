@@ -32,4 +32,19 @@ const genreShows = computed(() => showsByGenre.value[genreName.value] || [])
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 1rem;
 }
+
+@media (max-width: 600px) {
+  .genre-list {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 0.75rem;
+  }
+  .genre-list::-webkit-scrollbar {
+    display: none;
+  }
+  .genre-list > * {
+    flex: 0 0 auto;
+  }
+}
 </style>
