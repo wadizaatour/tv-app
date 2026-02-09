@@ -1,4 +1,3 @@
-// tests/useGenres.test.ts
 import { describe, it, expect } from 'vitest'
 import { useGenres } from '@/composables/useGenres'
 import { ref } from 'vue'
@@ -23,7 +22,7 @@ describe('useGenres composable', () => {
 
     expect(genres.value).toContain('Drama')
     expect(genres.value).toContain('Comedy')
-    
+
     expect(showsByGenre.value['Drama']).toBeDefined()
     expect(showsByGenre.value['Comedy']).toBeDefined()
 

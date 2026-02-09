@@ -1,16 +1,13 @@
-// tests/components/SearchBar.test.ts
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import SearchBar from '@/components/SearchBar.vue'
 
-// Mock data
 const mockShows = [
   { id: 1, name: 'Breaking Bad' },
   { id: 2, name: 'Game of Thrones' },
   { id: 3, name: 'The Office' },
 ]
 
-// Setup mocks once
 vi.mock('@/stores/shows', () => ({
   useShowsStore: () => ({ shows: mockShows }),
 }))
