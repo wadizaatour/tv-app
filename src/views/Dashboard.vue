@@ -29,20 +29,15 @@ function filterByGenre(genre: string) {
       <h3>Browse by Genre</h3>
       <GenreList :genres="genres" @select-genre="filterByGenre" />
     </div>
-
     <section v-for="(genreShows, genre) in filteredShowsByGenre" :key="genre">
       <router-link :to="`/genre/${genre}`" class="genre-link" v-if="!store.loading">
         <h2>{{ genre }}</h2>
       </router-link>
-
-      <div class="shows-list" :ref="genre">
-        <template v-if="store.loading">
-          <SkeletonCard v-for="n in 6" :key="n" />
-        </template>
-        <template v-else>
-          <ShowCard v-for="show in genreShows" :key="show.id" :show="show" />
-        </template>
-      </div>
+      <ul class="shows-list" :ref="genre">
+        <li v-for="show in genreShows" :key="show.id">
+          <ShowCard :show="show" />
+        </li>
+      </ul>
     </section>
   </div>
 </template>
@@ -79,30 +74,15 @@ function filterByGenre(genre: string) {
   flex-direction: row;
   overflow-x: auto;
   gap: 1rem;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch; /* smooth iOS scroll */
+  list-style: none;
 }
-
+.shows-list li {
+  flex: 0 0 auto;
+}
 .shows-list::-webkit-scrollbar {
-  display: none; /* hide scrollbar for cleaner look */
+  display: none;
 }
 
-/* Show All button */
-.show-all-btn {
-  margin-top: 0.5rem;
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: var(--color-primary);
-  color: #fff;
-  border-radius: 6px;
-  text-decoration: none;
-}
-
-.show-all-btn:hover {
-  background: var(--color-secondary);
-}
-
-/* ✅ Tablet adjustments */
 @media (max-width: 1024px) {
   .dashboard {
     padding: 1.5rem 2rem;
@@ -114,7 +94,6 @@ function filterByGenre(genre: string) {
   }
 }
 
-/* ✅ Mobile adjustments */
 @media (max-width: 600px) {
   .dashboard {
     padding: 1rem;
@@ -138,13 +117,6 @@ function filterByGenre(genre: string) {
 
   .shows-list {
     gap: 0.5rem;
-  }
-
-  .show-all-btn {
-    display: block;
-    text-align: center;
-    margin: 0.75rem auto 0;
-    font-size: 0.9rem;
   }
 }
 </style>
