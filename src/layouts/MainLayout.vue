@@ -15,19 +15,15 @@ const store = useShowsStore()
 <template>
   <main class="layout">
     <LoadingBar :loading="store.loading" />
-
     <header class="header">
       <h1 class="logo">
         <RouterLink to="/">🎬 MyShows</RouterLink>
       </h1>
-
       <div class="middle">
         <SearchBar />
       </div>
-
       <ThemeToggle />
     </header>
-
     <main class="content">
       <DashboardSkeleton v-if="store.loading" />
       <slot v-else />
