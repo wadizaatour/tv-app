@@ -3,12 +3,13 @@ import { ref, computed } from 'vue'
 import { useShowsStore } from '@/stores/shows'
 import { useRouter } from 'vue-router'
 
+const MAX_QUERY_LENGTH = 3
 const query = ref('')
 const store = useShowsStore()
 const router = useRouter()
 
 const results = computed(() => {
-  if (!query.value) return []
+  if (query.value.length < MAX_QUERY_LENGTH) return []
   const q = query.value.toLowerCase()
   return store.shows.filter((show) => show.name.toLowerCase().includes(q))
 })
@@ -22,11 +23,14 @@ function goToShow(showId: number) {
 <template>
   <div class="search-bar">
     <input v-model="query" type="text" placeholder="Search shows..." />
-    <ul v-if="results.length" class="results-dropdown">
-      <li v-for="show in results" :key="show.id" @click="goToShow(show.id)">
-        {{ show.name }}
-      </li>
-    </ul>
+    <div v-if="query.length >= 3" class="results-dropdown">
+      <ul v-if="results.length">
+        <li v-for="show in results" :key="show.id" @click="goToShow(show.id)">
+          {{ show.name }}
+        </li>
+      </ul>
+      <p v-else class="no-results">No shows found for "{{ query }}"</p>
+    </div>
   </div>
 </template>
 
@@ -43,7 +47,6 @@ function goToShow(showId: number) {
   border-radius: 20px;
   font-size: 0.9rem;
 }
-
 .results-dropdown {
   position: absolute;
   top: 100%;
@@ -53,11 +56,16 @@ function goToShow(showId: number) {
   border: 1px solid var(--color-border, #ccc);
   border-radius: 8px;
   margin-top: 0.25rem;
-  list-style: none;
-  padding: 0;
   max-height: 250px;
   overflow-y: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem; /* ✅ ensures consistent spacing */
+}
+
+.results-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .results-dropdown li {
@@ -68,5 +76,11 @@ function goToShow(showId: number) {
 .results-dropdown li:hover {
   background: var(--color-primary);
   color: #fff;
+}
+
+.no-results {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary, #666);
+  padding: 0.5rem 1rem;
 }
 </style>
