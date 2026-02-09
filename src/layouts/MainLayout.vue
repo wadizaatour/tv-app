@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import ThemeToggle from '@/components/ThemeToggle.vue'
-import Breadcrumb from '@/components/Breadcrumb.vue'
 import LoadingBar from '@/components/LoadingBar.vue'
 import SearchBar from '@/components/SearchBar.vue'
-import DashboardSkeleton from '@/components/DashboardSkeleton.vue'
 import { useDeviceType, DeviceType } from '@/composables/useDeviceType'
 import { useShowsStore } from '@/stores/shows'
+import { defineAsyncComponent } from 'vue'
 
+const DashboardSkeleton = defineAsyncComponent(() => import('@/components/DashboardSkeleton.vue'))
 const { deviceType } = useDeviceType()
 const store = useShowsStore()
 </script>

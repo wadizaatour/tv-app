@@ -28,7 +28,7 @@ const premiereYear = computed(() => {
 })
 
 const detailsLink = computed(() => {
-  return `/details/${encodeURIComponent(props.show.id)}`
+  return `/details/${props.show.id}`
 })
 </script>
 

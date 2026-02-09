@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import ShowCard from '@/components/ShowCard.vue'
-import GenreList from '@/components/GenreList.vue'
 import { useShowsStore } from '@/stores/shows'
 import { useGenres } from '@/composables/useGenres'
 import { ref, computed, onMounted } from 'vue'
+import { defineAsyncComponent } from 'vue'
 
+const GenreList = defineAsyncComponent(() => import('@/components/GenreList.vue'))
 const store = useShowsStore()
 onMounted(() => store.loadShows())
 
