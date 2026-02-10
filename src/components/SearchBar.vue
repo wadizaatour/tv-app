@@ -25,7 +25,7 @@ function goToShow(showId: number) {
 
 <template>
   <div class="search-bar">
-    <input v-model="query" type="text" placeholder="Search shows..." />
+    <input id="search-input" v-model="query" type="text" placeholder="Search shows..." />
     <div v-if="query.length >= 3" class="results-dropdown">
       <ul v-if="results.length">
         <li v-for="show in results" :key="show.id" @click="goToShow(show.id)">
@@ -42,6 +42,7 @@ function goToShow(showId: number) {
   position: relative;
   width: 100%;
   max-width: 500px;
+  border: none;
 }
 
 .search-bar input {
@@ -49,6 +50,7 @@ function goToShow(showId: number) {
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-size: 0.9rem;
+  border: none;
 }
 .results-dropdown {
   position: absolute;
