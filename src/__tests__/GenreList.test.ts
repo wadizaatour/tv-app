@@ -4,7 +4,7 @@ import GenreList from '@/components/GenreList.vue'
 
 const GENRES = ['Drama', 'Comedy', 'Action']
 
-describe('GenreList.vue', () => {
+describe('GenreList ensure list of genres is displayed based on the end point', () => {
   it('should display all genres as badges', () => {
     const wrapper = mount(GenreList, { props: { genres: GENRES } })
     const badges = wrapper.findAll('.genre-badge')

@@ -34,7 +34,7 @@ describe('SearchBar component to look for shows and redirect to details page', (
 
   it('shouldshows dropdown when query has 3+ characters', async () => {
     const wrapper = mount(SearchBar)
-    await wrapper.find('input').setValue('bre') // 3 chars
+    await wrapper.find('input').setValue('bre')
 
     expect(wrapper.find('.results-dropdown').exists()).toBe(true)
   })
