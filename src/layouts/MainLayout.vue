@@ -7,12 +7,11 @@ import { useShowsStore } from '@/stores/shows'
 import { defineAsyncComponent } from 'vue'
 import { useDeviceType, DeviceType } from '@/composables/useDeviceType'
 import MenuToggle from '@/components/MenuToggle.vue'
-import { toRefs } from 'vue'
 
 const DashboardSkeleton = defineAsyncComponent(() => import('@/components/DashboardSkeleton.vue'))
 const store = useShowsStore()
 
-const { deviceType } = toRefs(useDeviceType())
+const { deviceType } = useDeviceType()
 </script>
 
 <template>
