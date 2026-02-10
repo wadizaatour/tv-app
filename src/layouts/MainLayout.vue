@@ -17,20 +17,16 @@ const { deviceType } = useDeviceType()
 <template>
   <div class="layout" role="main">
     <LoadingBar :loading="store.loading" />
-
     <header class="header">
       <h1 class="logo">
         <RouterLink to="/" aria-label="Go to dashboard">🎬 MyShows</RouterLink>
       </h1>
-
       <form v-if="deviceType !== DeviceType.Mobile" role="search" class="search-wrapper">
         <SearchBar />
       </form>
-
       <div v-if="deviceType !== DeviceType.Mobile" class="theme-wrapper">
         <ThemeToggle />
       </div>
-
       <MenuToggle
         v-if="deviceType === DeviceType.Mobile"
         v-slot="{ closeMenu }"
@@ -41,7 +37,6 @@ const { deviceType } = useDeviceType()
         </form>
       </MenuToggle>
     </header>
-
     <section class="content">
       <DashboardSkeleton v-if="store.loading" />
       <slot v-else />

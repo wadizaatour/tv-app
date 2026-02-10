@@ -30,12 +30,10 @@ function filterByGenre(genre: string) {
       <h2>Browse by Genre</h2>
       <GenreList :genres="genres" @select-genre="filterByGenre" />
     </header>
-
     <section v-for="(genreShows, genre) in filteredShowsByGenre" :key="genre" class="genre-section">
       <router-link v-if="!store.loading" :to="`/genre/${genre}`" class="genre-link">
         <h2>{{ genre }}</h2>
       </router-link>
-
       <ul class="shows-list">
         <li v-for="show in genreShows" :key="show.id">
           <ShowCard :show="show" />

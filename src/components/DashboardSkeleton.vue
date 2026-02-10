@@ -4,7 +4,6 @@
       <div class="skeleton-title large"></div>
       <div class="skeleton-title medium"></div>
     </div>
-
     <section v-for="n in 2" :key="n">
       <div class="genre-link">
         <div class="skeleton-title small"></div>
@@ -21,8 +20,6 @@
     </section>
   </div>
 </template>
-
-<script setup lang="ts"></script>
 
 <style scoped>
 .dashboard {
