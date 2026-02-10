@@ -34,7 +34,7 @@
   --color-bg-light: #f8f8f8;
 }
 
-/* Respect user's system preference */
+/* default user's system preference */
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
     --color-primary: #dc143c;
