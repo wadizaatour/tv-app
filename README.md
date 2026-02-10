@@ -1,11 +1,13 @@
 # 🎬 MyShows Tv app
 
+Preview: https://myappshows.netlify.app/
+
 A modern **Vue 3 + Vite** application that demonstrates senior-level frontend engineering practices.  
 This project showcases clean architecture, responsive design, performance optimization, and reviewer empathy — built around a TV shows dashboard powered by an external API.
 
 ---
+
 <img width="3276" height="1608" alt="image" src="https://github.com/user-attachments/assets/51c5ed24-defc-43a2-b003-c25949089a0c" />
- 
 
 ## 🛠️ Setup & Installation
 
