@@ -75,18 +75,21 @@ const show = computed(() => store.shows.find((s) => s.id === showId))
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
+  z-index: 1;
 }
 
 .hero-content {
   position: relative;
   padding: 2rem;
   max-width: 800px;
+  z-index: 2;
 }
 
 .title {
   font-size: 2.5rem;
   font-weight: 700;
   margin: 0;
+  color: white;
 }
 
 .meta {
@@ -98,6 +101,7 @@ const show = computed(() => store.shows.find((s) => s.id === showId))
 .rating {
   font-size: 1.2rem;
   margin: 0.5rem 0 1rem;
+  color: white;
 }
 
 .cta-btn {
