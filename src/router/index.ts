@@ -18,6 +18,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/Genre.vue'),
     props: true,
   },
+  { path: '/:catchAll(.*)', redirect: { name: 'Dashboard' } },
 ]
 
 const router = createRouter({

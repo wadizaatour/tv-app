@@ -2,6 +2,7 @@
 import { useRoute } from 'vue-router'
 import { computed, onMounted } from 'vue'
 import { useShowsStore } from '@/stores/shows'
+import NotFound from '@/components/NotFound.vue'
 
 const route = useRoute()
 const store = useShowsStore()
@@ -48,6 +49,9 @@ const show = computed(() => store.shows.find((s) => s.id === showId))
       </div>
     </div>
     <div class="summary" v-html="show.summary"></div>
+  </div>
+  <div v-else class="not-found">
+    <NotFound />
   </div>
 </template>
 
