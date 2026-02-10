@@ -22,7 +22,7 @@ const show = computed(() => store.shows.find((s) => s.id === showId))
       <div class="hero-content">
         <h1 class="title">{{ show.name }}</h1>
         <p class="meta">{{ show.language }} • {{ show.genres.join(', ') }} • {{ show.status }}</p>
-        <p class="rating">⭐ {{ show.rating?.average ?? 'N/A' }}</p>
+        <p class="rating">⭐ {{ show.rating?.average ?? '0' }}</p>
         <a v-if="show.officialSite" :href="show.officialSite" target="_blank" class="cta-btn">
           Visit Official Site
         </a>
@@ -47,7 +47,6 @@ const show = computed(() => store.shows.find((s) => s.id === showId))
         <p>{{ show.network?.name ?? 'N/A' }}</p>
       </div>
     </div>
-
     <div class="summary" v-html="show.summary"></div>
   </div>
 </template>
