@@ -43,51 +43,76 @@ npm run test
 
 - **Node.js**: v24.12.0
 
-## Architectural Decisions
+## 🏗️ Architectural Decisions
 
-- **Framework: Vue 3 (Composition API)** Chosen for its clarity, scalability, and strong ecosystem. The Composition API allows composable, reusable logic (e.g., device detection, genre grouping) and keeps components clean and maintainable.
-- **TypeScript** Ensures type safety, readability, and explicitness in both components and unit tests. This avoids unsafe casts (`as any`) and improves developer confidence.
-- **CSS Architecture** Scoped styles with variables and responsive layouts. Flex and grid are used strategically: grid for desktop alignment (logo | search | toggle), flex for mobile (logo left, menu toggle right).
-- **Accessibility & Semantics** Semantic HTML tags (`nav`, `header`, `main`) and ARIA labels are used to improve screen reader support.
-- **Performance** Lazy loading and responsive image handling are applied to optimize Lighthouse scores.
-
-### Composables & Utilities
-
-- `useGenres` for genre-based filtering logic
-- `useDeviceType` for responsive device-aware rendering
-- `useShows` for API integration and loading state
-
-### Components
-
-- `ShowCard` — reusable card for show details
-- `SkeletonCard` — shimmer placeholder for show cards
-- `DashboardSkeleton` — full-page skeleton layout
-- `GenreList` — interactive genre filter
-- `ThemeToggle` — light/dark mode switch
-- `LoadingBar` — global loading indicator
-- `SearchBar` — search movies by name
-- `MenuToggle` — MobileMenu
+- **Vue 3 (Composition API)** — chosen for scalability, clarity, and reusable logic.
+- **TypeScript** — ensures type safety and readable, explicit code.
+- **CSS Architecture** — scoped styles with variables; grid for desktop alignment, flex for mobile layouts.
+- **Accessibility** — semantic HTML and ARIA labels for screen reader support.
+- **Performance** — lazy loading and responsive images for Lighthouse optimization.
+- **State Management (Pinia)** — caching API responses to avoid redundant calls and deliver a snappy UI.
 
 ---
 
+## ⚙️ Core Features
+
+### Composables
+
+- `useGenres` — genre‑based filtering and sorting
+- `useDeviceType` — responsive device detection
+- `useShows` — API integration and loading state
+
+### Components
+
+- **ShowCard** — reusable card for show details
+- **GenreList** — interactive genre filter
+- **SearchBar** — search shows by name
+- **ThemeToggle** — light/dark mode switch with localStorage persistence
+- **MenuToggle** — mobile navigation
+- **Skeletons & LoadingBar** — shimmer placeholders and global loading indicator
+
 ### Pages
 
-- `Dashboard` — Present list of TV shows based on their genre and sorted by rating
-- `Details` — Present information related to specific TV show
-- `Genre` — Present a list of TV shows from one specfic genre
+- **Dashboard** — shows grouped by genre, sorted by rating
+- **Details** — show information page
+- **Genre** — list of shows from a specific genre
 
-## Unit Test Coverage
+---
 
-We chose to cover the following key parts of the application:
+## 🧪 Unit Test Coverage
 
-**GenreList**  
-Critical for grouping shows by genre and rendering them correctly. Ensures the grouping and sorting logic is validated.
+We focused testing on the most impactful areas:
 
-**SearchBar**  
-Central to user interaction. Tested to confirm search input and emitted events work as expected.
+- **GenreList** — validates grouping and sorting logic
+- **SearchBar** — ensures search input and events work correctly
+- **ShowCard** — verifies props rendering and accessibility attributes
+- **useGenres composable** — tests genre extraction, grouping, and rating‑based sorting
 
-**ShowCard**  
-The primary UI element for displaying show details. Tested to ensure props render correctly and accessibility attributes are present.
+---
 
-**useGenres composable**  
-Core business logic for grouping and sorting shows. Tested to verify correctness of genre extraction, grouping, and rating‑based sorting.
+## 📦 State Management
+
+Pinia store (`useShowsStore`) improves navigation and responsiveness:
+
+- **Single Source of Truth** — central store for all show data
+- **Avoids Redundant API Calls** — skips fetch if data already exists
+- **Snappy UI** — cached data enables instant navigation
+- **Loading State** — provides feedback only when fetching initially
+
+**Example Behavior**
+
+- First visit: `loadShows()` fetches data and stores it in `shows`.
+- Subsequent navigations: store detects cached data and skips API call.
+- Result: fast transitions and a smooth user experience.
+
+---
+
+## 🎨 UI & Theme Toggle
+
+- **ThemeToggle Component** — allows switching between light and dark modes.
+- **LocalStorage Persistence** — remembers user preference across sessions.
+- **UI Placement**
+  - Desktop: top‑right in the header
+  - Mobile: bottom‑right in the menu footer
+- **Icons** — sun for light mode, moon for dark mode.
+- **Benefits** — consistent look across pages, improved user experience, and immediate theme application on reload.
