@@ -62,7 +62,7 @@ function goToShow(showId: number) {
   max-height: 250px;
   overflow-y: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 0.5rem; /* ✅ ensures consistent spacing */
+  padding: 0.5rem;
 }
 
 .results-dropdown ul {

@@ -24,14 +24,19 @@ const { deviceType } = toRefs(useDeviceType())
         <RouterLink to="/" aria-label="Go to dashboard">🎬 MyShows</RouterLink>
       </h1>
 
-      <div v-if="deviceType !== DeviceType.Mobile" class="desktop-actions">
-        <form role="search" class="search-wrapper">
-          <SearchBar />
-        </form>
+      <form v-if="deviceType !== DeviceType.Mobile" role="search" class="search-wrapper">
+        <SearchBar />
+      </form>
+
+      <div v-if="deviceType !== DeviceType.Mobile" class="theme-wrapper">
         <ThemeToggle />
       </div>
 
-      <MenuToggle v-if="deviceType === DeviceType.Mobile" v-slot="{ closeMenu }">
+      <MenuToggle
+        v-if="deviceType === DeviceType.Mobile"
+        v-slot="{ closeMenu }"
+        class="menu-toggle-wrapper"
+      >
         <form role="search" class="mobile-search">
           <SearchBar :closeMenu="closeMenu" />
         </form>
@@ -47,9 +52,9 @@ const { deviceType } = toRefs(useDeviceType())
 
 <style scoped>
 .header {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
   padding: 1rem 2rem;
 }
 
@@ -57,25 +62,36 @@ const { deviceType } = toRefs(useDeviceType())
   font-size: 1.4rem;
   font-weight: 700;
 }
+
 .logo a {
   color: var(--color-primary);
   text-decoration: none;
 }
 
-.desktop-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex: 1;
-  justify-content: center;
-}
 .search-wrapper {
-  flex: 1;
   max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.theme-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.menu-toggle-wrapper {
+  justify-self: end;
 }
 
 .content {
   flex: 1;
   padding: 1rem;
+}
+
+@media (max-width: 600px) {
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 </style>

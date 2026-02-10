@@ -25,7 +25,6 @@
 <script setup lang="ts"></script>
 
 <style scoped>
-/* Reuse dashboard spacing */
 .dashboard {
   background: var(--color-bg-light);
   width: 100%;

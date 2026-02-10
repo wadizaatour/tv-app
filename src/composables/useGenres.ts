@@ -7,23 +7,23 @@ export function useGenres(shows: () => IShow[]) {
   const showsByGenre = computed(() => {
     const grouped: Record<string, IShow[]> = {}
 
-    // Flatten genres into pairs once
-    const pairs: { genre: string; show: IShow }[] = []
+    // Flatten genres into tv show once
+    const tvShow: { genre: string; show: IShow }[] = []
     shows().forEach((show) => {
       show.genres.forEach((genre) => {
-        pairs.push({ genre, show })
+        tvShow.push({ genre, show })
       })
     })
 
     // Single loop to group
-    pairs.forEach(({ genre, show }) => {
+    tvShow.forEach(({ genre, show }) => {
       if (!grouped[genre]) {
         grouped[genre] = []
       }
       grouped[genre].push(show)
     })
 
-    // Sort each group
+    // Sort each group by rating descending
     for (const genre in grouped) {
       grouped[genre]?.sort((a, b) => (b.rating?.average ?? 0) - (a.rating?.average ?? 0))
     }

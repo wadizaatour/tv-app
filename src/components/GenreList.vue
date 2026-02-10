@@ -22,11 +22,9 @@ const selectedGenre = ref<string | null>(null)
 
 function selectGenre(genre: string) {
   if (selectedGenre.value === genre) {
-    // ✅ clicked again → clear selection
     selectedGenre.value = null
     emit('select-genre', '')
   } else {
-    // ✅ new selection
     selectedGenre.value = genre
     emit('select-genre', genre)
   }
@@ -57,7 +55,6 @@ function selectGenre(genre: string) {
   transform: scale(1.05);
 }
 
-/* ✅ Active state */
 .genre-badge.active {
   background: var(--color-primary, #e50914);
   color: #fff;

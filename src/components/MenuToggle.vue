@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import HamburgerIcon from '@/assets/HamburgerIcon.vue'
 import CloseIcon from '@/assets/CloseIcon.vue'
+import ThemeToggle from '@/components/ThemeToggle.vue'
 
 const isOpen = ref(false)
 
@@ -16,13 +17,13 @@ function closeMenu() {
 <template>
   <button class="menu-toggle" @click="toggleMenu" aria-label="Toggle menu">
     <HamburgerIcon v-if="!isOpen" />
-    <CloseIcon v-else />
   </button>
-
   <div v-if="isOpen" class="backdrop" @click="closeMenu"></div>
-
   <nav class="mobile-menu" :class="{ open: isOpen }">
     <slot :closeMenu="closeMenu" />
+    <div class="menu-footer" v-if="isOpen">
+      <ThemeToggle />
+    </div>
   </nav>
 </template>
 
@@ -61,5 +62,11 @@ function closeMenu() {
 
 .mobile-menu.open {
   right: 0;
+}
+
+.menu-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
 }
 </style>

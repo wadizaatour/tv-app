@@ -15,7 +15,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/genre/:name',
     name: 'GenrePage',
-    component: () => import('@/views/GenrePage.vue'),
+    component: () => import('@/views/Genre.vue'),
     props: true,
   },
 ]

@@ -42,10 +42,6 @@ onMounted(() => {
 
 <style scoped>
 .theme-toggle {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 1000;
   width: 48px;
   height: 48px;
   border-radius: 12px;
