@@ -38,6 +38,10 @@ function goToShow(showId: number) {
 </template>
 
 <style scoped>
+:root[data-theme='light'] .search-bar input {
+  background-color: lightgray;
+  color: #000;
+}
 .search-bar {
   position: relative;
   width: 100%;
