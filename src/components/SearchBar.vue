@@ -11,8 +11,8 @@ const router = useRouter()
 
 const results = computed(() => {
   if (query.value.length < MAX_QUERY_LENGTH) return []
-  const q = query.value.toLowerCase()
-  return store.shows.filter((show) => show.name.toLowerCase().includes(q))
+  const queryName = query.value.toLowerCase()
+  return store.shows.filter((show) => show.name.toLowerCase().includes(queryName))
 })
 
 function goToShow(showId: number) {
