@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import HamburgerIcon from '@/assets/HamburgerIcon.vue'
-import CloseIcon from '@/assets/CloseIcon.vue'
 import ThemeToggle from '@/components/ThemeToggle.vue'
 
 const isOpen = ref(false)
