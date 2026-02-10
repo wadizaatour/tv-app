@@ -15,16 +15,18 @@ function closeMenu() {
 </script>
 
 <template>
-  <button class="menu-toggle" @click="toggleMenu" aria-label="Toggle menu">
-    <HamburgerIcon v-if="!isOpen" />
-  </button>
-  <div v-if="isOpen" class="backdrop" @click="closeMenu"></div>
-  <nav class="mobile-menu" :class="{ open: isOpen }">
-    <slot :closeMenu="closeMenu" />
-    <div class="menu-footer" v-if="isOpen">
-      <ThemeToggle />
-    </div>
-  </nav>
+  <div>
+    <button class="menu-toggle" @click="toggleMenu" aria-label="Toggle menu">
+      <HamburgerIcon v-if="!isOpen" />
+    </button>
+    <div v-if="isOpen" class="backdrop" @click="closeMenu"></div>
+    <nav class="mobile-menu" :class="{ open: isOpen }">
+      <slot :closeMenu="closeMenu" />
+      <div class="menu-footer" v-if="isOpen">
+        <ThemeToggle />
+      </div>
+    </nav>
+  </div>
 </template>
 
 <style scoped>
