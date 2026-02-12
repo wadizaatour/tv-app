@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
 import ShowCard, { type IShowCard } from '@/components/ShowCard.vue'
 import type { IShow } from '@/services/api'
@@ -12,14 +12,14 @@ const mockShow: IShowCard = {
   },
 }
 
-const mockShowNoImage = {
+const mockShowNoImage: IShowCard = {
   id: 2,
   name: 'Show Without Image',
   premiered: '2015-01-01',
   image: undefined,
 }
 
-const mockShowNoDate = {
+const mockShowNoDate: IShowCard = {
   id: 3,
   name: 'Show Without Date',
   premiered: null,
@@ -29,41 +29,51 @@ const mockShowNoDate = {
 }
 
 describe('ShowCard component show a movie with image title and year', () => {
+  const globalStubs = {
+    RouterLink: {
+      template: '<a><slot /></a>',
+    },
+  }
+
   it('should render the show name and premiere year', () => {
-    const wrapper = mount(ShowCard, { props: { show: mockShow as IShow } })
+    const wrapper = shallowMount(ShowCard, {
+      props: { show: mockShow as IShow },
+      global: { stubs: globalStubs },
+    })
 
-    const title = wrapper.find('.show-title').text()
-    const year = wrapper.find('.show-year').text()
-
-    expect(title).toBe('Under the Dome')
-    expect(year).toBe('2013')
+    expect(wrapper.find('.show-title').text()).toBe('Under the Dome')
+    expect(wrapper.find('.show-year').text()).toBe('2013')
   })
 
   it('should render the show image when available', () => {
-    const wrapper = mount(ShowCard, { props: { show: mockShow } })
+    const wrapper = shallowMount(ShowCard, {
+      props: { show: mockShow },
+      global: { stubs: globalStubs },
+    })
 
     const image = wrapper.find('img')
-
     expect(image.exists()).toBe(true)
     expect(image.attributes('src')).toBe(mockShow.image?.medium)
     expect(image.attributes('alt')).toBe(mockShow.name)
   })
 
   it('should not render an image if none is provided', () => {
-    const wrapper = mount(ShowCard, { props: { show: mockShowNoImage } })
+    const wrapper = shallowMount(ShowCard, {
+      props: { show: mockShowNoImage },
+      global: { stubs: globalStubs },
+    })
 
-    const image = wrapper.find('img')
-
-    expect(image.exists()).toBe(false)
+    expect(wrapper.find('img').exists()).toBe(false)
     expect(wrapper.find('.show-title').text()).toBe('Show Without Image')
     expect(wrapper.find('.show-year').text()).toBe('2015')
   })
 
   it('should display "Unknown" when premiere date is missing', () => {
-    const wrapper = mount(ShowCard, { props: { show: mockShowNoDate } })
+    const wrapper = shallowMount(ShowCard, {
+      props: { show: mockShowNoDate },
+      global: { stubs: globalStubs },
+    })
 
-    const year = wrapper.find('.show-year').text()
-
-    expect(year).toBe('Unknown')
+    expect(wrapper.find('.show-year').text()).toBe('Unknown')
   })
 })

@@ -1,15 +1,3 @@
-<template>
-  <button
-    class="theme-toggle"
-    @click="toggleTheme"
-    :aria-label="`Switch to ${isDark ? 'light' : 'dark'} mode`"
-  >
-    <span class="icon">
-      <component :is="isDark ? SunIcon : MoonIcon" />
-    </span>
-  </button>
-</template>
-
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import SunIcon from '@/assets/SunIcon.vue'
@@ -39,6 +27,18 @@ onMounted(() => {
   setTheme(theme as 'dark' | 'light')
 })
 </script>
+
+<template>
+  <button
+    class="theme-toggle"
+    @click="toggleTheme"
+    :aria-label="`Switch to ${isDark ? 'light' : 'dark'} mode`"
+  >
+    <span class="icon">
+      <component :is="isDark ? SunIcon : MoonIcon" />
+    </span>
+  </button>
+</template>
 
 <style scoped>
 .theme-toggle {

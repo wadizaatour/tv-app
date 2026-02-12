@@ -1,10 +1,10 @@
-<template>
-  <div v-if="loading" class="loading-bar"></div>
-</template>
-
 <script setup lang="ts">
 defineProps<{ loading: boolean }>()
 </script>
+
+<template>
+  <div v-if="loading" class="loading-bar"></div>
+</template>
 
 <style scoped>
 .loading-bar {

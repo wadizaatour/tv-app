@@ -1,17 +1,3 @@
-<template>
-  <div class="genre-list" ref="listRef">
-    <span
-      v-for="genre in genres"
-      :key="genre"
-      class="genre-badge"
-      :class="{ active: genre === selectedGenre }"
-      @click="selectGenre(genre)"
-    >
-      {{ genre }}
-    </span>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { ref } from 'vue'
 
@@ -31,14 +17,42 @@ function selectGenre(genre: string) {
 }
 </script>
 
+<template>
+  <div class="genre-list" ref="listRef">
+    <span
+      v-for="genre in genres"
+      :key="genre"
+      class="genre-badge"
+      :class="{ active: genre === selectedGenre }"
+      @click="selectGenre(genre)"
+    >
+      {{ genre }}
+    </span>
+  </div>
+</template>
+
 <style scoped>
 .genre-list {
   display: flex;
   gap: 0.5rem;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-behavior: smooth;
 }
-
+.genre-list::-webkit-scrollbar {
+  height: 6px;
+  margin-top: 2px;
+}
+.genre-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.genre-list::-webkit-scrollbar-thumb {
+  background: var(--color-primary, #e50914);
+  border-radius: 3px;
+}
+.genre-list::-webkit-scrollbar-thumb:hover {
+  background: #c40810;
+}
 .genre-badge {
   flex-shrink: 0;
   padding: 0.5rem 1rem;

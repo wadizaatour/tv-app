@@ -32,14 +32,14 @@ describe('SearchBar component to look for shows and redirect to details page', (
     expect(wrapper.find('.results-dropdown').exists()).toBe(false)
   })
 
-  it('shouldshows dropdown when query has 3+ characters', async () => {
+  it('should shows dropdown when query has 3+ characters', async () => {
     const wrapper = mount(SearchBar)
     await wrapper.find('input').setValue('bre')
 
     expect(wrapper.find('.results-dropdown').exists()).toBe(true)
   })
 
-  it('shouldfilters shows correctly', async () => {
+  it('should filters shows correctly', async () => {
     const wrapper = mount(SearchBar)
     await wrapper.find('input').setValue('game')
 
@@ -48,7 +48,7 @@ describe('SearchBar component to look for shows and redirect to details page', (
     expect(results[0]?.text()).toBe('Game of Thrones')
   })
 
-  it('shouldshows no results message when nothing matches', async () => {
+  it('should shows no results message when nothing matches', async () => {
     const wrapper = mount(SearchBar)
     await wrapper.find('input').setValue('xyz123')
 
@@ -56,7 +56,7 @@ describe('SearchBar component to look for shows and redirect to details page', (
     expect(wrapper.find('.no-results').text()).toContain('No shows found')
   })
 
-  it('shouldclears search input when clicking a result', async () => {
+  it('should clears search input when clicking a result', async () => {
     const wrapper = mount(SearchBar)
     await wrapper.find('input').setValue('breaking')
     await wrapper.find('li').trigger('click')
@@ -64,7 +64,7 @@ describe('SearchBar component to look for shows and redirect to details page', (
     expect(wrapper.find('input').element.value).toBe('')
   })
 
-  it('shouldcalls closeMenu prop when provided', async () => {
+  it('should calls closeMenu prop when provided', async () => {
     const closeMenu = vi.fn()
     const wrapper = mount(SearchBar, {
       props: { closeMenu },
